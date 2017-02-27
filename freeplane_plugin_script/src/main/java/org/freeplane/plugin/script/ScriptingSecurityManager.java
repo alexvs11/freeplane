@@ -32,36 +32,34 @@ class ScriptingSecurityManager {
     final private Permissions permissions;
 
     public ScriptingSecurityManager(boolean pWithoutFileRestriction,
-            boolean pWithoutWriteRestriction,
-            boolean pWithoutNetworkRestriction, boolean pWithoutExecRestriction) {
-        permissions = new Permissions();
-		if (pWithoutExecRestriction && pWithoutFileRestriction && pWithoutWriteRestriction
-		        && pWithoutNetworkRestriction) {
-			permissions.add(new AllPermission());
-        }
-		else {
-			if (pWithoutNetworkRestriction) {
-				permissions.add(new SocketPermission("*", "connect,accept,listen,resolve"));
-				permissions.add(new RuntimePermission("setFactory"));
-			}
+    		boolean pWithoutWriteRestriction,
+    		boolean pWithoutNetworkRestriction, boolean pWithoutExecRestriction) {
+    	permissions = new Permissions();
+    	if (pWithoutNetworkRestriction) {
+    		permissions.add(new SocketPermission("*", "connect,accept,listen,resolve"));
+    		permissions.add(new RuntimePermission("setFactory"));
+    	}
 
-			if (pWithoutExecRestriction) {
-				permissions.add(new FilePermission("<<ALL FILES>>", "execute"));
-				permissions.add(new RuntimePermission("loadLibrary.*"));
-			}
-			if (pWithoutFileRestriction) {
-				permissions.add(new FilePermission("<<ALL FILES>>", "read"));
-				permissions.add(new RuntimePermission("readFileDescriptor"));
-			}
+    	if (pWithoutExecRestriction) {
+    		permissions.add(new FilePermission("<<ALL FILES>>", "execute"));
+    		permissions.add(new RuntimePermission("loadLibrary.*"));
+    	}
+    	if (pWithoutFileRestriction) {
+    		permissions.add(new FilePermission("<<ALL FILES>>", "read"));
+    		permissions.add(new RuntimePermission("readFileDescriptor"));
+    	}
 
-			if (pWithoutWriteRestriction) {
-				permissions.add(new RuntimePermission("writeFileDescriptor"));
-				permissions.add(new FilePermission("<<ALL FILES>>", "write,delete"));
-				permissions.add(new RuntimePermission("preferences"));
-			}
-        }
-        permissions.setReadOnly();
-        checkRequiredPermissions();
+    	if (pWithoutWriteRestriction) {
+    		permissions.add(new RuntimePermission("writeFileDescriptor"));
+    		permissions.add(new FilePermission("<<ALL FILES>>", "write,delete"));
+    		permissions.add(new RuntimePermission("preferences"));
+    	}
+    	checkRequiredPermissions();
+    	if (pWithoutExecRestriction && pWithoutFileRestriction && pWithoutWriteRestriction
+    			&& pWithoutNetworkRestriction) {
+    		permissions.add(new AllPermission());
+    	}
+    	permissions.setReadOnly();
     }
 
     private static final Permission URL_PERMISSION = new SocketPermission("*", "connect");

@@ -46,6 +46,7 @@ import javax.swing.text.html.parser.ParserDelegator;
 
 import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.ui.ShowSelectionAsRectangleAction;
+import org.freeplane.core.util.FreeplaneIconUtils;
 import org.freeplane.features.attribute.ModelessAttributeController;
 import org.freeplane.features.filter.FilterController;
 import org.freeplane.features.filter.NextNodeAction;
@@ -212,7 +213,7 @@ public class FreeplaneApplet extends JApplet {
 		if (window instanceof Frame){
 			Frame frame = (Frame)window;
 			ImageIcon mWindowIcon;
-			mWindowIcon = new ImageIcon(getClass().getResource(
+			mWindowIcon = FreeplaneIconUtils.createImageIcon(getClass().getResource(
 					"/images/Freeplane_frame_icon_64x64.png"));
 			frame.setIconImage(mWindowIcon.getImage());			
 			if (!frame.isResizable()){

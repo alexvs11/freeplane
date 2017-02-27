@@ -5,6 +5,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 import org.freeplane.core.resources.ResourceController;
+import org.freeplane.core.util.FreeplaneIconUtils;
 
 public class IconNotFound extends MindIcon {
 	private static final String DEFAULT_IMAGE_PATH = "/images";
@@ -26,7 +27,7 @@ public class IconNotFound extends MindIcon {
     public static ImageIcon createIconOrReturnNotFoundIcon(final String fileName) {
         final URL resource = ResourceController.getResourceController()
             .getResource(DEFAULT_IMAGE_PATH + "/" + fileName);
-        final ImageIcon icon = (resource == null) ? null : new ImageIcon(resource);
+        final ImageIcon icon = (resource == null) ? null : FreeplaneIconUtils.createImageIcon(resource);
         return icon == null ? (ImageIcon) new IconNotFound("?").getIcon() : icon;
     }
     
@@ -36,7 +37,7 @@ public class IconNotFound extends MindIcon {
     public static ImageIcon createIconOrReturnNull(final String fileName) {
         final URL resource = ResourceController.getResourceController()
                 .getResource(DEFAULT_IMAGE_PATH + "/" + fileName);
-        return (resource == null) ? null : new ImageIcon(resource);
+        return (resource == null) ? null : FreeplaneIconUtils.createImageIcon(resource);
     }
 
 }

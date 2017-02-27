@@ -60,7 +60,7 @@ import org.freeplane.plugin.script.proxy.Proxy.Reminder;
 
 import groovy.lang.Closure;
 
-class NodeProxy extends AbstractProxy<NodeModel> implements Node {
+public class NodeProxy extends AbstractProxy<NodeModel> implements Node {
 	private static final Integer ONE = 1;
 	private static final Integer ZERO = 0;
 

@@ -40,6 +40,7 @@ import javax.swing.JWindow;
 
 import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.util.FileUtils;
+import org.freeplane.core.util.FreeplaneIconUtils;
 import org.freeplane.core.util.FreeplaneVersion;
 import org.freeplane.features.mode.Controller;
 
@@ -59,7 +60,7 @@ public class FreeplaneSplashModern extends JWindow {
 	public FreeplaneSplashModern(final JFrame frame) {
 		super(frame);
 		splashResource = ResourceController.getResourceController().getResource("/images/Freeplane_splash.png");
-		splashImage = new ImageIcon(splashResource);
+		splashImage = FreeplaneIconUtils.createImageIcon(splashResource);
 		setBackground(new Color(0x57, 0xbf, 0x5e));
 		final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		final Dimension labelSize = new Dimension(splashImage.getIconWidth(), splashImage.getIconHeight());

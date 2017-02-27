@@ -35,7 +35,6 @@ import java.util.Map;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -50,6 +49,7 @@ import org.freeplane.core.ui.AFreeplaneAction;
 import org.freeplane.core.ui.IAcceleratorChangeListener;
 import org.freeplane.core.ui.IKeyStrokeProcessor;
 import org.freeplane.core.ui.SetAcceleratorOnNextClickAction;
+import org.freeplane.core.util.FreeplaneIconUtils;
 import org.freeplane.core.util.TextUtils;
 import org.freeplane.features.mode.Controller;
 import org.freeplane.features.mode.mindmapmode.MModeController;
@@ -127,7 +127,7 @@ public class FButtonBar extends JComponent implements IAcceleratorChangeListener
 		final JButton[] buttons = new JButton[BUTTON_NUMBER];
 		for (int i = 0; i < BUTTON_NUMBER; i++) {
 			final String name = "/images/f" + (i + 1) + ".png";
-			final JButton button = buttons[i] = new JButton(new ImageIcon(
+			final JButton button = buttons[i] = new JButton(FreeplaneIconUtils.createImageIcon(
 			    ResourceController.getResourceController().getResource(name))) {
 				/**
 				 * 

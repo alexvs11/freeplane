@@ -52,6 +52,7 @@ import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.ui.components.FreeplaneMenuBar;
 import org.freeplane.core.ui.components.UITools;
 import org.freeplane.core.util.Compat;
+import org.freeplane.core.util.FreeplaneIconUtils;
 import org.freeplane.features.map.IMapSelection;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.Controller;
@@ -332,11 +333,11 @@ class ApplicationViewController extends FrameController {
 		if (!Compat.isMacOsX()) {
 			final ImageIcon mWindowIcon;
 			if (Compat.isLowerJdk(Compat.VERSION_1_6_0)) {
-				mWindowIcon = new ImageIcon(ResourceController.getResourceController().getResource(
+				mWindowIcon = FreeplaneIconUtils.createImageIcon(ResourceController.getResourceController().getResource(
 				    "/images/Freeplane_frame_icon.png"));
 			}
 			else {
-				mWindowIcon = new ImageIcon(ResourceController.getResourceController().getResource(
+				mWindowIcon = FreeplaneIconUtils.createImageIcon(ResourceController.getResourceController().getResource(
 				    "/images/Freeplane_frame_icon_64x64.png"));
 			}
 			frame.setIconImage(mWindowIcon.getImage());

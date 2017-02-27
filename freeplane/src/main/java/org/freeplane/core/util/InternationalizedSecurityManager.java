@@ -15,16 +15,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.freeplane.plugin.script;
+package org.freeplane.core.util;
 
 import java.io.FileDescriptor;
 import java.net.InetAddress;
 import java.security.AccessControlException;
 import java.security.Permission;
 
-import org.freeplane.core.util.TextUtils;
-
-class InternationalizedSecurityManager extends SecurityManager {
+public class InternationalizedSecurityManager extends SecurityManager {
 	private static final int PERM_Accept = 0;
 	private static final int PERM_Connect = 1;
 	private static final int PERM_Delete = 7;

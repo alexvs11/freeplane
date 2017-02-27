@@ -26,7 +26,6 @@ import javax.swing.AbstractAction;
 import javax.swing.AbstractCellEditor;
 import javax.swing.Action;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -37,6 +36,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 import org.freeplane.core.resources.ResourceController;
+import org.freeplane.core.util.FreeplaneIconUtils;
 import org.freeplane.core.util.TextUtils;
 import org.freeplane.core.util.collection.IListModel;
 
@@ -123,7 +123,7 @@ class AttributeRegistryTable extends JTable {
 		}
 	}
 
-	static final private Icon checkBoxImage = new ImageIcon(ResourceController.getResourceController().getResource(
+	static final private Icon checkBoxImage = FreeplaneIconUtils.createImageIcon(ResourceController.getResourceController().getResource(
 	    "/images/checkbox12.png"));
 	private static final ButtonRenderer editButtonRenderer = new ButtonRenderer(AttributeManagerDialog.editButtonImage,
 	    TextUtils.getText("attributes_edit_tooltip"));

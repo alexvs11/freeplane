@@ -23,9 +23,8 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
-
 import org.freeplane.core.resources.ResourceController;
+import org.freeplane.core.util.FreeplaneIconUtils;
 import org.freeplane.features.filter.condition.ICondition;
 import org.freeplane.features.map.IMapSelection;
 import org.freeplane.features.map.MapChangeEvent;
@@ -113,7 +112,7 @@ public class Filter {
 
 	void displayFilterStatus() {
 		if (filterIcon == null) {
-			filterIcon = new ImageIcon(ResourceController.getResourceController().getResource("/images/filter.png"));
+			filterIcon = FreeplaneIconUtils.createImageIcon(ResourceController.getResourceController().getResource("/images/filter.png"));
 		}
 		if (getCondition() != null) {
 			Controller.getCurrentController().getViewController().addStatusInfo("filter", null, filterIcon);

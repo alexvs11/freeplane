@@ -366,7 +366,7 @@ public abstract class ResourceController {
 					LogUtils.severe("can not load icon '" + iconResource + "'");
 				}
 				else {
-					//final ImageIcon icon = new ImageIcon(url);
+					//final ImageIcon icon = FreeplaneIconUtils.createImageIcon(url);
 					icon = ImageIconFactory.getInstance().getImageIcon(url, height);
 					iconCache.put(iconKey, icon);
 				}

@@ -51,7 +51,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ComboBoxEditor;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -75,6 +74,7 @@ import org.freeplane.core.ui.components.ContainerComboBoxEditor;
 import org.freeplane.core.ui.components.FreeplaneMenuBar;
 import org.freeplane.core.ui.components.UITools;
 import org.freeplane.core.util.ClassLoaderFactory;
+import org.freeplane.core.util.FreeplaneIconUtils;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.features.format.FormattedDate;
 import org.freeplane.features.format.FormattedObject;
@@ -159,12 +159,12 @@ abstract public class FrameController implements ViewController {
 		this.mapViewManager = mapViewManager;
 		final ResourceController resourceController = ResourceController.getResourceController();
 		if(textIcon == null){
-			FrameController.textIcon = new ImageIcon(resourceController.getResource("/images/text.png"));
-			FrameController.numberIcon = new ImageIcon(resourceController.getResource("/images/number.png"));
-			FrameController.dateIcon = new ImageIcon(resourceController.getResource("/images/calendar_red.png"));
-			FrameController.dateTimeIcon = new ImageIcon(resourceController.getResource("/images/calendar_clock_red.png"));
-			FrameController.linkIcon = new ImageIcon(resourceController.getResource("/images/" + resourceController.getProperty("link_icon")));
-			FrameController.localLinkIcon = new ImageIcon(resourceController.getResource("/images/" + resourceController.getProperty("link_local_icon")));
+			FrameController.textIcon = FreeplaneIconUtils.createImageIcon(resourceController.getResource("/images/text.png"));
+			FrameController.numberIcon = FreeplaneIconUtils.createImageIcon(resourceController.getResource("/images/number.png"));
+			FrameController.dateIcon = FreeplaneIconUtils.createImageIcon(resourceController.getResource("/images/calendar_red.png"));
+			FrameController.dateTimeIcon = FreeplaneIconUtils.createImageIcon(resourceController.getResource("/images/calendar_clock_red.png"));
+			FrameController.linkIcon = FreeplaneIconUtils.createImageIcon(resourceController.getResource("/images/" + resourceController.getProperty("link_icon")));
+			FrameController.localLinkIcon = FreeplaneIconUtils.createImageIcon(resourceController.getResource("/images/" + resourceController.getProperty("link_local_icon")));
 		}
 		this.propertyKeyPrefix = propertyKeyPrefix;
 		statusPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 3, 0));

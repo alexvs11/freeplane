@@ -32,7 +32,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
 
-import javax.swing.ImageIcon;
 import javax.swing.ListCellRenderer;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -45,6 +44,7 @@ import org.freeplane.core.ui.IndexedTree;
 import org.freeplane.core.ui.LengthUnits;
 import org.freeplane.core.ui.TimePeriodUnits;
 import org.freeplane.core.util.FileUtils;
+import org.freeplane.core.util.FreeplaneIconUtils;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.Quantity;
 import org.freeplane.core.util.TextUtils;
@@ -151,7 +151,7 @@ public class OptionPanelBuilder {
 				final String iconName = element.getAttribute("icon", null);
 				final Object displayedItem;
 				if(iconName != null) {
-					displayedItem = new ImageIcon(ResourceController.getResourceController().getResource("/images/" + iconName));
+					displayedItem = FreeplaneIconUtils.createImageIcon(ResourceController.getResourceController().getResource("/images/" + iconName));
 				}
 				else {
 					final String translationKey = element.getAttribute("text", "OptionPanel." + choice);

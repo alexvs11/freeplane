@@ -24,6 +24,7 @@ import javax.swing.WindowConstants;
 import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.ui.LabelAndMnemonicSetter;
 import org.freeplane.core.ui.components.UITools;
+import org.freeplane.core.util.FreeplaneIconUtils;
 import org.freeplane.core.util.TextUtils;
 import org.freeplane.main.addons.AddOnProperties;
 
@@ -94,7 +95,7 @@ public class ManageAddOnsDialog extends JDialog {
 	}
 
 	private ImageIcon createIcon(String resource) {
-		return new ImageIcon(ResourceController.getResourceController().getResource(resource));
+		return FreeplaneIconUtils.createImageIcon(ResourceController.getResourceController().getResource(resource));
 	}
 
 	private Dimension getPreferredSizeForWindow() {

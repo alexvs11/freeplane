@@ -3,9 +3,8 @@ package org.freeplane.core.ui.menubuilders.generic;
 import java.net.URL;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
-
 import org.freeplane.core.ui.AFreeplaneAction;
+import org.freeplane.core.util.FreeplaneIconUtils;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.TextUtils;
 
@@ -39,7 +38,7 @@ public class EntryAccessor {
 			if (iconResource != null) {
 				final URL url = resourceAccessor.getResource(iconResource);
 				if(url != null)
-					icon = new ImageIcon(url);
+					icon = FreeplaneIconUtils.createImageIcon(url);
 				else {
 					LogUtils.severe("Can not load icon '" + iconResource + "'");
 					icon = null;

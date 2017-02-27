@@ -31,6 +31,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import org.freeplane.core.resources.ResourceController;
+import org.freeplane.core.util.FreeplaneIconUtils;
 import org.freeplane.core.util.FreeplaneVersion;
 import org.freeplane.core.util.HtmlUtils;
 import org.freeplane.core.util.LogUtils;
@@ -237,7 +238,7 @@ public class ReportGenerator extends StreamHandler {
 						errorCounter++;
 						if(TextUtils.getRawText("internal_error_tooltip", null) != null){
 							if(logButton == null){
-								final ImageIcon errorIcon = new ImageIcon(ResourceController.getResourceController().getResource(
+								final ImageIcon errorIcon = FreeplaneIconUtils.createImageIcon(ResourceController.getResourceController().getResource(
 										"/images/icons/messagebox_warning.png"));
 								logButton = new JButton(){
 									@Override public Dimension getPreferredSize(){

@@ -53,17 +53,13 @@ public class FreeplaneIconUtils {
 		return createImageIcon(resourceUrl);
 	}
 
-	public static ImageIcon createImageIconPrivileged(final URL resourceUrl) {
+	public static ImageIcon createImageIcon(final URL resourceUrl) {
 		return AccessController.doPrivileged(new PrivilegedAction<ImageIcon>() {
 			@Override
 			public ImageIcon run() {
-				return  createImageIcon(resourceUrl);
+				return new ImageIcon(resourceUrl);
 			}
 		});
-	}
-
-	private static ImageIcon createImageIcon(final URL resourceUrl) {
-		return new ImageIcon(resourceUrl);
 	}
 
 	private static boolean isSvgAntialiasEnabled() {

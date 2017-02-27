@@ -38,6 +38,7 @@ import javax.swing.SwingConstants;
 import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.ui.components.FreeplaneToolBar;
 import org.freeplane.core.ui.components.UITools;
+import org.freeplane.core.util.FreeplaneIconUtils;
 
 class PreviewDialog extends JDialog implements ActionListener {
 	final private static double DEFAULT_ZOOM_FACTOR_STEP = Math.sqrt(2);
@@ -93,11 +94,11 @@ class PreviewDialog extends JDialog implements ActionListener {
 		ImageIcon icon = null;
 		final URL imageURL = ResourceController.getResourceController().getResource("/images/" + iconName);
 		if (imageURL != null) {
-			icon = new ImageIcon(imageURL);
+			icon = FreeplaneIconUtils.createImageIcon(imageURL);
 		}
 		if (action != null) {
 			if (icon != null) {
-				action.putValue(Action.SMALL_ICON, new ImageIcon(imageURL));
+				action.putValue(Action.SMALL_ICON, FreeplaneIconUtils.createImageIcon(imageURL));
 			}
 			if (name != null) {
 				action.putValue(Action.NAME, name);

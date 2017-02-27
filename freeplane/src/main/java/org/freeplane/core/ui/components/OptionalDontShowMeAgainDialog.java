@@ -37,6 +37,7 @@ import javax.swing.WindowConstants;
 import org.apache.commons.lang.StringUtils;
 import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.ui.LabelAndMnemonicSetter;
+import org.freeplane.core.util.FreeplaneIconUtils;
 import org.freeplane.core.util.TextUtils;
 import org.freeplane.features.map.IMapSelection;
 import org.freeplane.features.map.NodeModel;
@@ -169,11 +170,11 @@ public class OptionalDontShowMeAgainDialog {
 		        5, 5, 0, 0), 0, 0));
 		final ImageIcon questionMark;
 		if(mMessageType == ONLY_OK_SELECTION_IS_SHOWN){
-			questionMark = new ImageIcon(ResourceController.getResourceController().getResource(
+			questionMark = FreeplaneIconUtils.createImageIcon(ResourceController.getResourceController().getResource(
 		    "/images/icons/messagebox_warning.png"));
 		}
 		else{
-			questionMark = new ImageIcon(ResourceController.getResourceController().getResource(
+			questionMark = FreeplaneIconUtils.createImageIcon(ResourceController.getResourceController().getResource(
 		    "/images/icons/help.png"));
 		}
 		mDialog.getContentPane().add(
