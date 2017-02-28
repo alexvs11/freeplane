@@ -7,6 +7,8 @@ import groovy.lang.MissingPropertyException;
 import groovy.lang.Script;
 
 import java.net.URI;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -20,6 +22,7 @@ import org.freeplane.core.resources.ResourceController;
 import org.freeplane.core.ui.components.UITools;
 import org.freeplane.core.util.FreeplaneVersion;
 import org.freeplane.core.util.HtmlUtils;
+import org.freeplane.core.util.InternationalizedSecurityManager;
 import org.freeplane.core.util.LogUtils;
 import org.freeplane.core.util.MenuUtils;
 import org.freeplane.core.util.TextUtils;
@@ -107,11 +110,27 @@ public abstract class FreeplaneScriptBaseClass extends Script {
 	
     public FreeplaneScriptBaseClass() {
 	    super();
-	    nodeMetaClass = InvokerHelper.getMetaClass(Proxy.NodeRO.class);
+		nodeMetaClass = doWithoutSecurityChecks(new PrivilegedAction<MetaClass>() {
+			@Override
+			public MetaClass run() {
+		    	final MetaClass metaClass = InvokerHelper.getMetaClass(Proxy.NodeRO.class);
+			    DefaultGroovyMethods.mixin(Number.class, NodeArithmeticsCategory.class);
+			    initBinding();
+				return metaClass;
+			}
+		});
 	    // Groovy rocks!
-	    DefaultGroovyMethods.mixin(Number.class, NodeArithmeticsCategory.class);
-	    initBinding();
     }
+
+	static <T> T doWithoutSecurityChecks(final PrivilegedAction<T> privilegedAction) {
+		return AccessController.doPrivileged(new PrivilegedAction<T>() {
+			@Override
+			public T run() {
+				InternationalizedSecurityManager m = ((InternationalizedSecurityManager)System.getSecurityManager());
+				return m.doWithoutSecurityChecks(privilegedAction);
+			}
+		});
+	}
 
     @SuppressWarnings("unchecked")
 	public void initBinding() {
@@ -122,12 +141,18 @@ public abstract class FreeplaneScriptBaseClass extends Script {
     }
 
 	@Override
-    public void setBinding(Binding binding) {
-	    super.setBinding(addStaticBindings(binding));
-	    initBinding();
+    public void setBinding(final Binding binding) {
+		doWithoutSecurityChecks(new PrivilegedAction<Void>() {
+			@Override
+			public Void run() {
+				FreeplaneScriptBaseClass.super.setBinding(addStaticBindings(binding));
+			    initBinding();
+			    return null;
+			}
+		});
     }
 
-	private Binding addStaticBindings(Binding binding) {
+	private Binding addStaticBindings(final Binding binding) {
 	    for (Entry<String, Object> entry : ScriptingConfiguration.getStaticProperties().entrySet()) {
             binding.setProperty(entry.getKey(), entry.getValue());
         }

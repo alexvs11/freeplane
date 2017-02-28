@@ -20,7 +20,9 @@ package org.freeplane.core.util;
 import java.io.FileDescriptor;
 import java.net.InetAddress;
 import java.security.AccessControlException;
+import java.security.AccessController;
 import java.security.Permission;
+import java.security.PrivilegedAction;
 
 public class InternationalizedSecurityManager extends SecurityManager {
 	private static final int PERM_Accept = 0;
@@ -208,19 +210,32 @@ public class InternationalizedSecurityManager extends SecurityManager {
 		return getException(e, pPermissionGroup, pPermission, "");
 	}
 
+	private boolean isDisabled = false;
+	
 	@Override
 	public void checkPermission(Permission perm) {
-		disallowSupressingAccessChecks(perm);
-		super.checkPermission(perm);
-	}
-
-	private void disallowSupressingAccessChecks(Permission perm) {
+		if(! isDisabled)
+			super.checkPermission(perm);
 	}
 
 	@Override
 	public void checkPermission(Permission perm, Object context) {
-		disallowSupressingAccessChecks(perm);
-		super.checkPermission(perm, context);	
+		if(! isDisabled)
+			super.checkPermission(perm, context);	
+	}
+
+	public <T> T doWithoutSecurityChecks(PrivilegedAction<T> privilegedAction) {
+		final boolean wasDisabled = isDisabled;
+	    try{
+	    	if(! isDisabled) {
+	    		AccessController.checkPermission(new RuntimePermission("setSecurityManager"));
+	    		isDisabled = true;
+	    	}
+	    	return privilegedAction.run();
+	    }
+	    finally{
+			isDisabled = wasDisabled;
+	    }
 	}
 	
 	

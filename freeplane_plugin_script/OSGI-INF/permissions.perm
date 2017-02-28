@@ -1,4 +1,3 @@
-(java.lang.reflect.ReflectPermission "suppressAccessChecks")
 (org.osgi.framework.PackagePermission "*" "exportonly,import")
 (org.osgi.framework.AdminPermission "*" "resolve,resource,weave")
 (java.lang.RuntimePermission "*")

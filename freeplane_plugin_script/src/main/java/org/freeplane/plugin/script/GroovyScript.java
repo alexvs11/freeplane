@@ -22,6 +22,7 @@ package org.freeplane.plugin.script;
 import java.io.File;
 import java.io.PrintStream;
 import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
 import java.util.regex.Matcher;
@@ -30,6 +31,7 @@ import org.codehaus.groovy.ast.ASTNode;
 import org.codehaus.groovy.ast.ModuleNode;
 import org.codehaus.groovy.control.CompilerConfiguration;
 import org.codehaus.groovy.runtime.InvokerHelper;
+import org.freeplane.core.util.InternationalizedSecurityManager;
 import org.freeplane.features.map.NodeModel;
 import org.freeplane.features.mode.Controller;
 import org.freeplane.plugin.script.proxy.ProxyFactory;
@@ -132,8 +134,15 @@ public class GroovyScript implements IScript {
             try {
                 trustedCompileAndCache();
                 Thread.currentThread().setContextClassLoader(scriptClassLoader);
-                final Binding binding = createBinding(node);
-                compiledScript.setBinding(binding);
+                FreeplaneScriptBaseClass.doWithoutSecurityChecks(new PrivilegedAction<Void>() {
+
+					@Override
+					public Void run() {
+		                final Binding binding = createBinding(node);
+		                compiledScript.setBinding(binding);
+		                return null;
+					}
+				});
                 System.setOut(outStream);
 				return compiledScript.run();
             } finally {
@@ -162,14 +171,14 @@ public class GroovyScript implements IScript {
 
     private void trustedCompileAndCache() throws Throwable {
     	final ScriptingSecurityManager scriptingSecurityManager = createScriptingSecurityManager();
-    	AccessController.doPrivileged(new PrivilegedExceptionAction<Void>() {
+    	FreeplaneScriptBaseClass.doWithoutSecurityChecks(new PrivilegedAction<Void>() {
 
 			@Override
-			public Void run() throws PrivilegedActionException {
+			public Void run() {
 				try {
 					compileAndCache(scriptingSecurityManager);
 				} catch (Exception e) {
-					throw new PrivilegedActionException(e);
+					throw new RuntimeException(e);
 				} catch (Error e) {
 					throw e;
 				} catch (Throwable e) {
