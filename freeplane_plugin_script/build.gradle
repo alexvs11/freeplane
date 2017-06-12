@@ -56,6 +56,9 @@ jar {
         // Require-Bundle is ignored by bnd => replaced by Import-Package!
         //instruction 'Require-Bundle', 'org.freeplane.core;bundle-version="1.0.1"'
     }
+    into 'resources', {
+        from 'src/main/java/org/freeplane/plugin/script/proxy/resources'
+    }
 }
 
 task copyScripts(type: Copy) {

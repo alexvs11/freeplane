@@ -178,6 +178,10 @@ jar {
         instruction 'Bundle-Activator', 'org.freeplane.main.osgi.Activator'
         //        instruction 'Bundle-RequiredExecutionEnvironment', 'J2SE-1.8'
     }
+    into 'resources', {
+        // for OSGI bundle should I place it in the root?
+        from '../freeplane_plugin_script/src/main/java/org/freeplane/plugin/script/proxy/resources'
+    }
 }
 
 task copyOSGiJars(type: Copy) {

@@ -14,10 +14,9 @@ public class ServerConfig extends ResourceConfig {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-        // create JsonProvider to provide custom ObjectMapper
+        //TBD: register as class
         JacksonJaxbJsonProvider provider = new JacksonJaxbJsonProvider();
         provider.setMapper(mapper);
-
         ServerExceptionMapper mapperException = new ServerExceptionMapper();
 
         this.register(org.freeplane.plugin.script.proxy.MyResource.class);
@@ -25,10 +24,7 @@ public class ServerConfig extends ResourceConfig {
         // in com.example package
         this.register(provider);
         this.register(mapperException);
-
-        Map<String, Object> properties = new HashMap<String, Object>(getProperties());
-        properties.put("com.sun.jersey.spi.container.ContainerRequestFilters", "org.freeplane.plugin.script.proxy.AuthFilter");
-        this.setProperties(properties);
+        this.register(AuthFilter.class);
     }
 
 }

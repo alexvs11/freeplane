@@ -15,6 +15,10 @@ task freeplanelauncherJar(type: Jar) {
                      "Main-Class": "org.freeplane.launcher.Launcher",
                      "Class-Path": "framework.jar")
      }
+     into 'resources', {
+        // for OSGI bundle should I place it in the root?
+        from '../freeplane_plugin_script/src/main/java/org/freeplane/plugin/script/proxy/resources'
+     }
 }
 
 jar.dependsOn freeplanelauncherJar
