@@ -185,7 +185,7 @@ public class GroovyScript implements IScript {
 
     private static boolean groovyPatched = false; 
     private Script compileAndCache(final ScriptingSecurityManager scriptingSecurityManager) throws Throwable {
-    	if(! groovyPatched){
+    	if(false){
     		GroovyPatcher.apply(GroovyObject.class);
     		groovyPatched = true;
     	}

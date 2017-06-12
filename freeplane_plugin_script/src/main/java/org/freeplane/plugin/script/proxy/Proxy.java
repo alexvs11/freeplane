@@ -27,6 +27,8 @@ import org.freeplane.features.styles.IStyle;
 import org.freeplane.plugin.script.ExecuteScriptException;
 
 import groovy.lang.Closure;
+import org.freeplane.plugin.script.proxy.TaskExternal;
+import java.util.ArrayList;
 
 /**
  * This interface alone defines the api for accessing the internal state of the Freeplane. All read-write methods
@@ -45,6 +47,18 @@ import groovy.lang.Closure;
  * of the caching mechanism for Formulas.
  */
 public interface Proxy {
+	
+	interface Server {
+		ArrayList<TaskExternal> getTasks();
+	}
+	
+	interface TaskExternal {	
+		public String getName();
+		public String getProject();
+		public boolean isDone();
+		public int getUrgency();
+	}
+
 	/** Node's attribute table: <code>node.attributes</code> - read-only.
 	 * <p>
 	 * Attributes are name - value pairs assigned to a node. A node may have multiple attributes

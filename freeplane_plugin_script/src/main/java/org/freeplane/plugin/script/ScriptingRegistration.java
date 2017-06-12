@@ -62,6 +62,7 @@ import org.freeplane.plugin.script.addons.ManageAddOnsAction;
 import org.freeplane.plugin.script.addons.ManageAddOnsDialog;
 import org.freeplane.plugin.script.addons.ScriptAddOnProperties;
 import org.freeplane.plugin.script.filter.ScriptConditionController;
+import org.freeplane.plugin.script.proxy.Server;
 
 class ScriptingRegistration {
 	final private class ScriptModel implements IScriptModel {
@@ -180,6 +181,9 @@ class ScriptingRegistration {
 			new ScriptConditionController());
 		ScriptingPolicy.installRestrictingPolicy();
 		System.setSecurityManager(new InternationalizedSecurityManager());
+
+        // start server
+        // Server.getServer();
 	}
 
 	private void registerGuiStuff(ModeController modeController) {

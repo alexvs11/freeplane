@@ -51,6 +51,12 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.service.url.URLConstants;
 import org.osgi.service.url.URLStreamHandlerService;
 
+//import org.glassfish.grizzly.http.server.HttpServer;
+//import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+//import org.glassfish.jersey.server.ResourceConfig;
+//import java.io.IOException;
+//import java.net.URI;
+
 /**
  * @author Dimitry Polivaev
  * 05.01.2009
@@ -153,6 +159,20 @@ class ActivatorImpl implements BundleActivator {
 		}
 	}
 
+//    public static final String BASE_URI = "http://localhost:8080/";
+	
+//    public static HttpServer startServer() {
+//        // create a resource config that scans for JAX-RS resources and providers
+//        // in com.example package
+//        final ResourceConfig rc = new ResourceConfig(org.freeplane.plugin.script.proxy.MyResource.class);
+//
+//        // create and start a new instance of grizzly http server
+//        // exposing the Jersey application at BASE_URI
+//        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
+//    }
+//    
+//    private static HttpServer server = null;
+	
 	private void startFramework(final BundleContext context) {
         registerClasspathUrlHandler(context);
 		if (null == System.getProperty("org.freeplane.core.dir.lib", null)) {
@@ -209,6 +229,10 @@ class ActivatorImpl implements BundleActivator {
 				starter.createFrame(getCallParameters());
 			}
 		});
+		// init server
+//		System.err.println("starting servlet conainer here");
+//		LogUtils.info("starting servlet conainer here");
+//		server = startServer();
 	}
 	
 	private static class OsgiExtentionInstaller implements ExtensionInstaller{

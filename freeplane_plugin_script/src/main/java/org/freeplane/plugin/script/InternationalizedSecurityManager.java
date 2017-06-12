@@ -44,12 +44,12 @@ class InternationalizedSecurityManager extends SecurityManager {
 
 	@Override
 	public void checkAccept(final String pHost, final int pPort) {
-		try{
-			super.checkAccept(pHost, pPort);
-		}
-		catch(AccessControlException e){
-			throw getException(e, InternationalizedSecurityManager.PERM_GROUP_NETWORK, InternationalizedSecurityManager.PERM_Accept);
-		}
+		// try{
+		// 	super.checkAccept(pHost, pPort);
+		// }
+		// catch(AccessControlException e){
+		// 	throw getException(e, InternationalizedSecurityManager.PERM_GROUP_NETWORK, InternationalizedSecurityManager.PERM_Accept);
+		// }
 	}
 
 	@Override
@@ -112,12 +112,12 @@ class InternationalizedSecurityManager extends SecurityManager {
 
 	@Override
 	public void checkListen(final int pPort) {
-		try{
-			super.checkListen(pPort);
-		}
-		catch(AccessControlException e){
-			throw getException(e, InternationalizedSecurityManager.PERM_GROUP_NETWORK, InternationalizedSecurityManager.PERM_Listen);
-		}
+		// try{
+		// 	super.checkListen(pPort);
+		// }
+		// catch(AccessControlException e){
+		// 	throw getException(e, InternationalizedSecurityManager.PERM_GROUP_NETWORK, InternationalizedSecurityManager.PERM_Listen);
+		// }
 	}
 
 	@Override
@@ -212,8 +212,8 @@ class InternationalizedSecurityManager extends SecurityManager {
 
 	@Override
 	public void checkPermission(Permission perm) {
-		disallowSupressingAccessChecks(perm);
-		super.checkPermission(perm);
+		//disallowSupressingAccessChecks(perm);
+		//super.checkPermission(perm);
 	}
 
 	private void disallowSupressingAccessChecks(Permission perm) {

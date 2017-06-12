@@ -51,6 +51,7 @@ freeplane/resources/xml/mindmapmodemenu.xml
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 .idea/uiDesigner.xml
+classes
 
 # Gradle:
 .idea/gradle.xml
